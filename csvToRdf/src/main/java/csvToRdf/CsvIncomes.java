@@ -92,7 +92,7 @@ public class CsvIncomes {
                     String approval2 = confirmed.replace(".", "");
                     String approvalNew = approval2.replace(",", ".");
 
-                    //Creation of Resources
+                    //Creation of Resources 
                     Resource instanceKAE = infModel.createResource(Ontology.instancePrefix + "KAE/"
                             + year.toString() + "/Income/" + oneDigit + "/" + twoDigit + "/" + threeDigit
                             + "/" + fourDigit);
@@ -107,26 +107,14 @@ public class CsvIncomes {
                             + fifthLevelOfKae1 + "/" + fifthLevelOfKae2 + "/"
                             + i);
 
-                    Resource instanceSpendingItem = infModel.createResource(Ontology.instancePrefix + "SpendingItem/"
+                    Resource instanceCollectedItem = infModel.createResource(Ontology.instancePrefix + "CollectedItem/"
                             + year.toString() + "/" + dateuri + "/"
                             + oneDigit + "/" + twoDigit + "/" + threeDigit + "/" + fourDigit + "/"
                             + fifthLevelOfKae1 + "/" + fifthLevelOfKae2 + "/"
                             + i);
 
-                    Resource instanceExpenseItem = infModel.createResource(Ontology.instancePrefix + "ExpenseApprovalItem/"
+                    Resource instanceRevenueRecognizedItem = infModel.createResource(Ontology.instancePrefix + "RevenueRecognizedItem/"
                             + year.toString() + "/" + dateuri + "/"
-                            + oneDigit + "/" + twoDigit + "/" + threeDigit + "/" + fourDigit + "/"
-                            + fifthLevelOfKae1 + "/" + fifthLevelOfKae2 + "/"
-                            + i);
-
-                    Resource instanceSpendingExpLine = infModel.createResource(Ontology.instancePrefix + "ExpenditureLine/"
-                            + "SpendingItem/" + year.toString() + "/" + dateuri + "/"
-                            + oneDigit + "/" + twoDigit + "/" + threeDigit + "/" + fourDigit + "/"
-                            + fifthLevelOfKae1 + "/" + fifthLevelOfKae2 + "/"
-                            + i);
-
-                    Resource instanceExpenseExpLine = infModel.createResource(Ontology.instancePrefix + "ExpenditureLine/"
-                            + "ExpenseApprovalItem/" + year.toString() + "/" + dateuri + "/"
                             + oneDigit + "/" + twoDigit + "/" + threeDigit + "/" + fourDigit + "/"
                             + fifthLevelOfKae1 + "/" + fifthLevelOfKae2 + "/"
                             + i);
@@ -137,14 +125,14 @@ public class CsvIncomes {
                             + fifthLevelOfKae1 + "/" + fifthLevelOfKae2 + "/"
                             + i);
 
-                    Resource instanceSpendingUps = infModel.createResource(Ontology.instancePrefix + "UnitPriceSpecification/"
-                            + "SpendingItem/" + year.toString() + "/" + dateuri + "/"
+                    Resource instanceCollectedUps = infModel.createResource(Ontology.instancePrefix + "UnitPriceSpecification/"
+                            + "CollectedItem/" + year.toString() + "/" + dateuri + "/"
                             + oneDigit + "/" + twoDigit + "/" + threeDigit + "/" + fourDigit + "/"
                             + fifthLevelOfKae1 + "/" + fifthLevelOfKae2 + "/"
                             + i);
 
-                    Resource instanceExpenseUps = infModel.createResource(Ontology.instancePrefix + "UnitPriceSpecification/"
-                            + "ExpenseApprovalItem/" + year.toString() + "/" + dateuri + "/"
+                    Resource instanceRevenueRecognizedUps = infModel.createResource(Ontology.instancePrefix + "UnitPriceSpecification/"
+                            + "RevenueRecognizedItem/" + year.toString() + "/" + dateuri + "/"
                             + oneDigit + "/" + twoDigit + "/" + threeDigit + "/" + fourDigit + "/"
                             + fifthLevelOfKae1 + "/" + fifthLevelOfKae2 + "/"
                             + i);
@@ -157,54 +145,49 @@ public class CsvIncomes {
                     //Resources' s type declarations 
                     infModel.add(instanceKAECustom, RDF.type, Ontology.customKaeResource);
                     infModel.add(instanceBudgetItem, RDF.type, Ontology.budgetItemResource);
-                    infModel.add(instanceSpendingItem, RDF.type, Ontology.spendingItemResource);
-                    infModel.add(instanceExpenseItem, RDF.type, Ontology.expenseItemResource);
-                    infModel.add(instanceSpendingExpLine, RDF.type, Ontology.expLineResource);
-                    infModel.add(instanceExpenseExpLine, RDF.type, Ontology.expLineResource);
-                    infModel.add(instanceSpendingUps, RDF.type, Ontology.upsResource);
+                    infModel.add(instanceCollectedItem, RDF.type, Ontology.collectedItemResource);
+                    infModel.add(instanceRevenueRecognizedItem, RDF.type, Ontology.revenueRecognizedItemResource);
+                    infModel.add(instanceCollectedUps, RDF.type, Ontology.upsResource);
                     infModel.add(instanceBudgetUps, RDF.type, Ontology.upsResource);
-                    infModel.add(instanceExpenseUps, RDF.type, Ontology.upsResource);
+                    infModel.add(instanceRevenueRecognizedUps, RDF.type, Ontology.upsResource);
                     infModel.add(instanceCurrency, RDF.type, Ontology.currencyResource);
 
                     //Properties addition to Resources
-                    instanceSpendingItem.addProperty(Ontology.hasExpenditureLine, instanceSpendingExpLine);
-                    instanceExpenseItem.addProperty(Ontology.hasExpenditureLine, instanceExpenseExpLine);
-
                     instanceBudgetItem.addProperty(Ontology.seller, instanceOrganization);
-                    instanceSpendingExpLine.addProperty(Ontology.seller, instanceOrganization);
-                    instanceExpenseExpLine.addProperty(Ontology.seller, instanceOrganization);
+                    instanceCollectedItem.addProperty(Ontology.seller, instanceOrganization);
+                    instanceRevenueRecognizedItem.addProperty(Ontology.seller, instanceOrganization);
 
                     instanceBudgetItem.addProperty(Ontology.price, instanceBudgetUps);
-                    instanceSpendingExpLine.addProperty(Ontology.amount, instanceSpendingUps);
-                    instanceExpenseExpLine.addProperty(Ontology.amount, instanceExpenseUps);
+                    instanceCollectedItem.addProperty(Ontology.price, instanceCollectedUps);
+                    instanceRevenueRecognizedItem.addProperty(Ontology.price, instanceRevenueRecognizedUps);
 
                     instanceBudgetItem.addProperty(Ontology.hasKae, instanceKAE);
-                    instanceSpendingExpLine.addProperty(Ontology.hasKae, instanceKAE);
-                    instanceExpenseExpLine.addProperty(Ontology.hasKae, instanceKAE);
+                    instanceCollectedItem.addProperty(Ontology.hasKae, instanceKAE);
+                    instanceRevenueRecognizedItem.addProperty(Ontology.hasKae, instanceKAE);
 
                     instanceBudgetItem.addProperty(Ontology.hasCustomKae, instanceKAECustom);
-                    instanceSpendingExpLine.addProperty(Ontology.hasCustomKae, instanceKAECustom);
-                    instanceExpenseExpLine.addProperty(Ontology.hasCustomKae, instanceKAECustom);
+                    instanceCollectedItem.addProperty(Ontology.hasCustomKae, instanceKAECustom);
+                    instanceRevenueRecognizedItem.addProperty(Ontology.hasCustomKae, instanceKAECustom);
 
                     instanceBudgetItem.addProperty(Ontology.issued, dateFormatted, XSDDatatype.XSDdateTime);
-                    instanceSpendingItem.addProperty(Ontology.issued, dateFormatted, XSDDatatype.XSDdateTime);
-                    instanceExpenseItem.addProperty(Ontology.issued, dateFormatted, XSDDatatype.XSDdateTime);
+                    instanceCollectedItem.addProperty(Ontology.issued, dateFormatted, XSDDatatype.XSDdateTime);
+                    instanceRevenueRecognizedItem.addProperty(Ontology.issued, dateFormatted, XSDDatatype.XSDdateTime);
 
                     instanceBudgetItem.addProperty(Ontology.subject, subject, XSDDatatype.XSDstring);
-                    instanceSpendingItem.addProperty(Ontology.subject, subject, XSDDatatype.XSDstring);
-                    instanceExpenseItem.addProperty(Ontology.subject, subject, XSDDatatype.XSDstring);
+                    instanceCollectedItem.addProperty(Ontology.subject, subject, XSDDatatype.XSDstring);
+                    instanceRevenueRecognizedItem.addProperty(Ontology.subject, subject, XSDDatatype.XSDstring);
 
                     instanceBudgetItem.addProperty(Ontology.financialYear, year.toString(), XSDDatatype.XSDgYear);
-                    instanceSpendingItem.addProperty(Ontology.financialYear, year.toString(), XSDDatatype.XSDgYear);
-                    instanceExpenseItem.addProperty(Ontology.financialYear, year.toString(), XSDDatatype.XSDgYear);
+                    instanceCollectedItem.addProperty(Ontology.financialYear, year.toString(), XSDDatatype.XSDgYear);
+                    instanceRevenueRecognizedItem.addProperty(Ontology.financialYear, year.toString(), XSDDatatype.XSDgYear);
 
                     instanceBudgetUps.addProperty(Ontology.hasCurrencyValue, String.valueOf(budgettNew), XSDDatatype.XSDfloat);
-                    instanceSpendingUps.addProperty(Ontology.hasCurrencyValue, String.valueOf(collectNew), XSDDatatype.XSDfloat);
-                    instanceExpenseUps.addProperty(Ontology.hasCurrencyValue, String.valueOf(approvalNew), XSDDatatype.XSDfloat);
+                    instanceCollectedUps.addProperty(Ontology.hasCurrencyValue, String.valueOf(collectNew), XSDDatatype.XSDfloat);
+                    instanceRevenueRecognizedUps.addProperty(Ontology.hasCurrencyValue, String.valueOf(approvalNew), XSDDatatype.XSDfloat);
 
                     instanceBudgetUps.addProperty(Ontology.hasCurrency, instanceCurrency);
-                    instanceSpendingUps.addProperty(Ontology.hasCurrency, instanceCurrency);
-                    instanceExpenseUps.addProperty(Ontology.hasCurrency, instanceCurrency);
+                    instanceCollectedUps.addProperty(Ontology.hasCurrency, instanceCurrency);
+                    instanceRevenueRecognizedUps.addProperty(Ontology.hasCurrency, instanceCurrency);
 
                     instanceKAECustom.addProperty(Ontology.kae, String.valueOf(customKae), XSDDatatype.XSDstring);
                 }

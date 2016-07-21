@@ -23,8 +23,10 @@ public class Ontology {
         public static final Resource skosConceptResource;
         public static final Resource customKaeResource;
         public static final Resource spendingItemResource;
+        public static final Resource collectedItemResource;        
         public static final Resource budgetItemResource;
         public static final Resource expenseItemResource;
+        public static final Resource revenueRecognizedItemResource;
         public static final Resource committedItemResource;
         public static final Resource expLineResource;
         public static final Resource upsResource;
@@ -131,8 +133,10 @@ public class Ontology {
                 skosConceptResource = ResourceFactory.createResource(skosPrefix + "Concept");
                 customKaeResource = ResourceFactory.createResource(elodPrefix + "KaeThessaloniki");
                 spendingItemResource = ResourceFactory.createResource(elodPrefix + "SpendingItem");
+                collectedItemResource = ResourceFactory.createResource(elodPrefix + "CollectedItem");
                 budgetItemResource = ResourceFactory.createResource(elodPrefix + "BudgetItem");
                 expenseItemResource = ResourceFactory.createResource(elodPrefix + "ExpenseApprovalItem");
+                revenueRecognizedItemResource = ResourceFactory.createResource(elodPrefix + "RevenueRecognizedItem");
                 expLineResource = ResourceFactory.createResource(elodPrefix + "ExpenditureLine");
                 upsResource = ResourceFactory.createResource(goodRelationsPrefix + "UnitPriceSpecification");
                 currencyResource = ResourceFactory.createResource(elodPrefix + "Currency");
